@@ -4,6 +4,8 @@ A basic K8S deployment to use as an example, or testing new clusters.
 
 # Get this deployment up and running.  
 
+A basic K8S project consists of 3 parts.  A deployment, a serivce and an ingress.  The deployment specifies what docker image to run, how many copies, as well as rules that specify how containers will be replaced if there is a failure or upgrade to the deployment.   The service exposes networking of the deployment.  It gives a handy single point of reference for other objects in the k8s cluster to talk to one or multiple pods.  And finally the Ingress is an http/https load balancer that exposes the cluster to the outside world.  The ingress rules tell K8S what URL should go to what workload.  
+
 ## Verify your kubectl command is connected to your cluster.  
 
 You should be able to do a `kubectl get nodes` and get a non-error response.  
