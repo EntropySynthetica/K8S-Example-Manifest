@@ -1,0 +1,22 @@
+  
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: helloworld-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+
+spec:
+  rules:
+
+  - host: helloworld.local  # Any requests showing up to our ingress from this URL will get routed to the service below.  
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: helloworld-service # The service and port to route these requests to.  
+            port: 
+              number: 80

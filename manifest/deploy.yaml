@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  labels:
+    app: helloworld 
+  name: helloworld
+  namespace: default
+
+spec:
+  replicas: 3  # Number of Pods to run in this deployment.  In this case 3 copies.  
+  selector:
+    matchLabels:
+      app: helloworld  # Name of the Pod template below that this deployment is managing.  
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      labels:
+        app: helloworld  # Name of the Pod.  This name is importatnt because our service will reference it. 
+    spec:
+      containers:
+      - image: bashofmann/rancher-demo:1.0.17  # Use this image to create our pods from.  The image by default will get pulled from Dockerhub if it is not local.
+        imagePullPolicy: IfNotPresent
+        name: helloworld  
+        resources: {}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always

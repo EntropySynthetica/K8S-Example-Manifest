@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: helloworld-service
+  name: helloworld-service
+  namespace: default
+
+spec:
+  clusterIP: None
+  selector:
+    app: helloworld # This references the name of the pod(s) this service will connect to.  If there is more than one replica the service will auto load balance. 
+  ports:
+    - protocol: TCP
+      port: 80  # Port things will connect to this service on.  This port can be different than the target port.  Think of the service like a NAT proxy. 
+      targetPort: 8080  # Port the Pod is listening on.  
