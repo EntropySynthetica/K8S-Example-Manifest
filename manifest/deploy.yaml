@@ -25,9 +25,15 @@ spec:
         app: helloworld  # Name of the Pod.  This name is importatnt because our service will reference it. 
     spec:
       containers:
-      - image: bashofmann/rancher-demo:1.0.17  # Use this image to create our pods from.  The image by default will get pulled from Dockerhub if it is not local.
+      - image: bashofmann/rancher-demo:1.1.0  # Use this image to create our pods from.  The image by default will get pulled from Dockerhub if it is not local.
         imagePullPolicy: IfNotPresent
         name: helloworld  
-        resources: {}
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
       dnsPolicy: ClusterFirst
       restartPolicy: Always
